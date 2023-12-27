@@ -1,0 +1,9 @@
+---
+- hosts: web
+  tasks:
+    - name: add git
+      ansible.builtin.apt:
+        name: git
+        state: present
+        update_cache: true
+      become: true
