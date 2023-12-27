@@ -12,3 +12,15 @@ add-git:
 
 del-git:
 		ansible-playbook playbooks/del-git.yml -i inventory.ini -u root
+
+update-cache:
+	ansible-playbook playbooks/tags.yml  -i inventory.ini --tags update_cache -u root  
+
+install-apps:
+	ansible-playbook playbooks/tags.yml -i inventory.ini --tags install_apps -u root 
+	
+install-git:
+	ansible-playbook playbooks/tags.yml -i inventory.ini  --tags install-git -u root 
+
+create-users:
+	ansible-playbook playbooks/tags.yml -i inventory.ini  --tags create_users -u root

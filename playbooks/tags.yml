@@ -1,0 +1,43 @@
+---
+- hosts: web
+  tasks:
+    - name: install git
+      ansible.builtin.apt:
+        name: git
+        state: present
+        update_cache: true
+      become: true
+    - name: Update package manager cache
+      apt:
+        update_cache: true
+      tags: [update_cache]
+    - name: Install Git
+      apt:
+        name: git
+        state: present
+      tags: [install_apps]
+      become: true
+    - name: Install Make
+      apt:
+        name: make
+        state: present
+      tags: [install_apps]
+      become: true
+    - name: Create user arya
+      user:
+        name: arya
+        state: present
+      tags: [create_users]
+      become: true
+    - name: Create user sansa
+      user:
+        name: sansa
+        state: present
+      tags: [create_users]
+      become: true
+    - name: Create user tirion
+      user:
+        name: tirion
+        state: present
+      tags: [create_users]
+      become: true
