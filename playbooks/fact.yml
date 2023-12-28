@@ -1,6 +1,5 @@
 ---
 - hosts: web
-  become: true
   tasks:
     - name: Display all facts
       debug:
@@ -11,3 +10,4 @@
         module: copy
         content: '{{ facts_output.ansible_facts}}'
         dest: /home/fessan/git/ansible-learn/file.txt
+      delegate_to: localhost
