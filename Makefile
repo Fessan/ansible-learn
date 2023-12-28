@@ -31,3 +31,6 @@ handlers:
 vars:
 	ansible-playbook playbooks/vars.yml -i inventory.ini -u root
 
+
+server-vars:
+	ansible-playbook playbooks/server_vars.yml -i inventory.ini -u root

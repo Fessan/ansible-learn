@@ -1,0 +1,27 @@
+---
+- hosts: web
+  gather_facts: false
+  become: true
+  vars:
+    root_dir: /etc/nginx
+    nginx_port: 8080
+  tasks:
+    - name: Install nginx
+      apt:
+        name: nginx
+        state: present
+    - name: copy index.html.j2
+      template:
+        src: ../files/index.html.j2
+        dest: /usr/share/nginx/html/index.html
+      notify: restart nginx
+    - name: copy ngixn.conf
+      template:
+        src: ../files/nginx.conf
+        dest: '{{root_dir}}/nginx.conf'
+      notify: restart nginx
+  handlers:
+    - name: restart nginx
+      service:
+        name: nginx
+        state: restarted
