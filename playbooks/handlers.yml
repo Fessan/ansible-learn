@@ -7,7 +7,6 @@
       apt:
         name: nginx
         state: present
-      notify: restart nginx
     - name: copy index.html
       template:
         src: ../files/index.html
