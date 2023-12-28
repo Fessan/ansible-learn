@@ -1,0 +1,25 @@
+---
+- hosts: web
+  gather_facts: false
+  become: true
+  tasks:
+    - name: Install nginx
+      apt:
+        name: nginx
+        state: present
+      notify: restart nginx
+    - name: copy index.html
+      template:
+        src: ../files/index.html
+        dest: /usr/share/nginx/html/index.html
+      notify: restart nginx
+    - name: copy ngixn.conf
+      copy:
+        src: ../files/nginx.conf
+        dest: /etc/nginx/nginx.conf
+      notify: restart nginx
+  handlers:
+    - name: restart nginx
+      service:
+        name: nginx
+        state: restarted

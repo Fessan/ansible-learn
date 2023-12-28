@@ -24,3 +24,6 @@ install-git:
 
 create-users:
 	ansible-playbook playbooks/tags.yml -i inventory.ini  --tags create_users -u root
+
+handlers:
+	ansible-playbook playbooks/handlers.yml -i inventory.ini -u root
