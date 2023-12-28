@@ -27,3 +27,7 @@ create-users:
 
 handlers:
 	ansible-playbook playbooks/handlers.yml -i inventory.ini -u root
+
+vars:
+	ansible-playbook playbooks/vars.yml -i inventory.ini -u root
+
