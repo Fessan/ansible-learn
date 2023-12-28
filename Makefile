@@ -34,3 +34,7 @@ vars:
 
 server-vars:
 	ansible-playbook playbooks/server_vars.yml -i inventory.ini -u root
+
+
+fact:
+	ansible-playbook playbooks/fact.yml -i inventory.ini -u root --ask-become-pass

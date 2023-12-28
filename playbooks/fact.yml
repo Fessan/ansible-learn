@@ -1,0 +1,13 @@
+---
+- hosts: web
+  become: true
+  tasks:
+    - name: Display all facts
+      debug:
+        var: ansible_facts
+      register: facts_output
+    - name: Save facts to a local file
+      local_action:
+        module: copy
+        content: '{{ facts_output.ansible_facts}}'
+        dest: /home/fessan/git/ansible-learn/file.txt
