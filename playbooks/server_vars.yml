@@ -4,7 +4,7 @@
   become: true
   vars:
     root_dir: /etc/nginx
-    nginx_port: 8080
+    nginx_port: 80
   tasks:
     - name: Install nginx
       apt:

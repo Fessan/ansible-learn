@@ -43,3 +43,8 @@ fact:
 
 loop:
 	ansible-playbook playbooks/loops.yml -i inventory.ini -u root
+
+
+filter:
+	ansible-playbook playbooks/filter.yml -i inventory.ini -u root
+
