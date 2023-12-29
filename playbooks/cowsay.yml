@@ -1,0 +1,34 @@
+---
+- hosts: web
+  become: true
+  vars:
+    nginx_conf: /etc/nginx
+  tasks:
+    - name: Install nginx
+      apt:
+        name: nginx
+        state: present
+    - name: save date
+      set_fact:
+        msg: '{{ ansible_date_time.date }}'
+    - name: save server_name
+      set_fact:
+        server_name: '{{ ansible_hostname }}'
+    - name: cowsay
+      command: cowsay 'This is server {{ server_name }}'
+      register: cowsay_result
+    - name: copy index.html
+      template:
+        src: ../files/index.html.j2
+        dest: /usr/share/nginx/html/index.html
+      notify: restart nginx
+    - name: copy ngixn.conf
+      copy:
+        src: ../files/nginx.conf
+        dest: '{{ nginx_conf }}/nginx.conf'
+      notify: restart nginx
+  handlers:
+    - name: restart nginx
+      service:
+        name: nginx
+        state: restarted

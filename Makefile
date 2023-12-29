@@ -48,3 +48,7 @@ loop:
 filter:
 	ansible-playbook playbooks/filter.yml -i inventory.ini -u root
 
+cowsay:
+	ansible-playbook playbooks/cowsay.yml -i inventory.ini -u root
+
+
