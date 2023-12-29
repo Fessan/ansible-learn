@@ -1,0 +1,28 @@
+---
+- hosts: web
+  gather_facts: false
+  become: true
+  vars:
+    nginx_conf: /etc/nginx
+    users: [jaime, sansa, robert]
+  tasks:
+    - name: Add users
+      ansible.builtin.user:
+        name: '{{ item }}'
+        state: present
+      loop: '{{ users }}'
+    - name: Create .gitconfig
+      template:
+        src: ../files/.gitconfig.j2
+        dest: /home/{{ item }}/.gitconfig
+      loop: '{{ users }}'
+    - name: Create .ssh directory
+      file:
+        path: /home/{{ item }}/.ssh
+        state: directory
+      loop: '{{ users }}'
+    - name: Add public key
+      copy:
+        src: ~/.ssh/id_rsa.pub
+        dest: /home/{{ item }}/.ssh/authorized_keys
+      loop: '{{ users }}'
