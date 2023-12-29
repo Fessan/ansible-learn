@@ -8,9 +8,6 @@
       apt:
         name: nginx
         state: present
-    - name: save date
-      set_fact:
-        msg: '{{ ansible_date_time.date }}'
     - name: save server_name
       set_fact:
         server_name: '{{ ansible_hostname }}'
